@@ -9,16 +9,16 @@ The driver includes dg405.c and dg405.h files.
 * Integrate dg405.h and dg405.c files into the project
 * Include the dg405.h file in your code like below.
 
+``` c
+#include "dg405.h"
+```
+
 ## File information
 * dg405.h : This header file contains the declarations of the driver APIs.
 * dg405.c : This source file contains the definitions of the driver APIs.
 
 ## Supported interfaces
 * GPIO
-
-``` c
-#include "dg405.h"
-```
 
 ## User Guide
 ### Initialising the device

@@ -32,7 +32,7 @@
  */
 #include "dg405.h"
 
-#define LEN(arr) ((int)(sizeof(arr) / sizeof(arr)[0])) /* Return length of array */
+#define LEN(arr) ((int)(sizeof(arr) / sizeof(arr)[0])) /* Return length of array. */
 
 /*!
  * @brief This internal API is used to validate the device structure pointer for

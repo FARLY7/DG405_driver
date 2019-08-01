@@ -1,4 +1,4 @@
-# DG405_driver
+# DG405 Mux API
 A simple driver for the DG405 8-channel multiplexer.
 
 ## Introduction

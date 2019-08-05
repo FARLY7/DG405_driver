@@ -43,7 +43,7 @@ static dg405_status_t null_ptr_check(const dg405_dev *dev);
 /*!
  * @brief Truth table defining possible mux combinations.
  */
-static const uint8_t dg405_mux[8][3] = {
+static uint8_t dg405_mux[8][3] = {
     {0, 0, 0},
     {0, 0, 1},
     {0, 1, 0},
@@ -75,7 +75,9 @@ dg405_status_t dg405_disable(const dg405_dev *dev)
     if(null_ptr_check(dev) != DG405_OK)
         return DG405_E_NULL_PTR;
 
-    dev->gpio_write(dev->gpio_port_en, dev->gpio_pin_en, 1);
+    uint8_t val = 1;
+
+    dev->gpio_write(dev->gpio_port_en, dev->gpio_pin_en, &val);
 
     return DG405_OK;
 }
@@ -88,9 +90,9 @@ dg405_status_t dg405_switch_output(const dg405_dev *dev, uint8_t output)
     if(null_ptr_check(dev) != DG405_OK)
         return DG405_E_NULL_PTR;
 
-    dev->gpio_write(dev->gpio_port_a, dev->gpio_pin_a, dg405_mux[output][0]);
-    dev->gpio_write(dev->gpio_port_b, dev->gpio_pin_b, dg405_mux[output][1]);
-    dev->gpio_write(dev->gpio_port_c, dev->gpio_pin_c, dg405_mux[output][2]);
+    dev->gpio_write(dev->gpio_port_a, dev->gpio_pin_a, &dg405_mux[output][0]);
+    dev->gpio_write(dev->gpio_port_b, dev->gpio_pin_b, &dg405_mux[output][1]);    
+    dev->gpio_write(dev->gpio_port_c, dev->gpio_pin_c, &dg405_mux[output][2]);
 
     return DG405_OK;
 }
@@ -103,9 +105,11 @@ dg405_status_t dg405_get_output(const dg405_dev *dev, uint8_t *output)
     if(null_ptr_check(dev) != DG405_OK)
         return DG405_E_NULL_PTR;
 
-    uint8_t pin_a = dev->gpio_read(dev->gpio_port_a, dev->gpio_pin_a);
-    uint8_t pin_b = dev->gpio_read(dev->gpio_port_b, dev->gpio_pin_b);
-    uint8_t pin_c = dev->gpio_read(dev->gpio_port_c, dev->gpio_pin_c);
+    uint8_t pin_a, pin_b, pin_c;
+
+    dev->gpio_read(dev->gpio_port_a, dev->gpio_pin_a, &pin_a);
+    dev->gpio_read(dev->gpio_port_b, dev->gpio_pin_b, &pin_b);
+    dev->gpio_read(dev->gpio_port_c, dev->gpio_pin_c, &pin_c);
 
     for(size_t i = 0 ; i < LEN(dg405_mux) ; i++)
     {

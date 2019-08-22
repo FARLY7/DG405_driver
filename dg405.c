@@ -38,7 +38,7 @@
  * @brief This internal API is used to validate the device structure pointer for
  * null conditions.
  */
-static dg405_status_t null_ptr_check(const dg405_dev *dev);
+static dg405_status_t null_ptr_check(const dg405_dev_t *dev);
 
 /*!
  * @brief Truth table defining possible mux combinations.
@@ -57,12 +57,12 @@ static uint8_t dg405_mux[8][3] = {
 /*!
  * @brief This API enables the routing/output of the device.
  */
-dg405_status_t dg405_enable(const dg405_dev *dev)
+dg405_status_t dg405_enable(const dg405_dev_t *dev)
 {   
     if(null_ptr_check(dev) != DG405_OK)
         return DG405_E_NULL_PTR;
 
-    dev->gpio_write(dev->gpio_port_en, dev->gpio_pin_en, 0);
+    dev->gpio_write(dev->port_en, dev->pin_en, 0);
 
     return DG405_OK;
 }
@@ -70,14 +70,14 @@ dg405_status_t dg405_enable(const dg405_dev *dev)
 /*!
  * @brief This API disables the routing/output of the device.
  */
-dg405_status_t dg405_disable(const dg405_dev *dev)
+dg405_status_t dg405_disable(const dg405_dev_t *dev)
 {
     if(null_ptr_check(dev) != DG405_OK)
         return DG405_E_NULL_PTR;
 
     uint8_t val = 1;
 
-    dev->gpio_write(dev->gpio_port_en, dev->gpio_pin_en, &val);
+    dev->gpio_write(dev->port_en, dev->pin_en, &val);
 
     return DG405_OK;
 }
@@ -85,14 +85,14 @@ dg405_status_t dg405_disable(const dg405_dev *dev)
 /*!
  * @brief This API configures the mux of the device to output specified pin.
  */
-dg405_status_t dg405_switch_output(const dg405_dev *dev, uint8_t output)
+dg405_status_t dg405_switch_output(const dg405_dev_t *dev, uint8_t output)
 {
     if(null_ptr_check(dev) != DG405_OK)
         return DG405_E_NULL_PTR;
 
-    dev->gpio_write(dev->gpio_port_a, dev->gpio_pin_a, &dg405_mux[output][0]);
-    dev->gpio_write(dev->gpio_port_b, dev->gpio_pin_b, &dg405_mux[output][1]);    
-    dev->gpio_write(dev->gpio_port_c, dev->gpio_pin_c, &dg405_mux[output][2]);
+    dev->gpio_write(dev->port_a, dev->pin_a, &dg405_mux[output][0]);
+    dev->gpio_write(dev->port_b, dev->pin_b, &dg405_mux[output][1]);    
+    dev->gpio_write(dev->port_c, dev->pin_c, &dg405_mux[output][2]);
 
     return DG405_OK;
 }
@@ -100,16 +100,16 @@ dg405_status_t dg405_switch_output(const dg405_dev *dev, uint8_t output)
 /*!
  * @brief This API get the currently configured output pin of the mux.
  */
-dg405_status_t dg405_get_output(const dg405_dev *dev, uint8_t *output)
+dg405_status_t dg405_get_output(const dg405_dev_t *dev, uint8_t *output)
 {
     if(null_ptr_check(dev) != DG405_OK)
         return DG405_E_NULL_PTR;
 
     uint8_t pin_a, pin_b, pin_c;
 
-    dev->gpio_read(dev->gpio_port_a, dev->gpio_pin_a, &pin_a);
-    dev->gpio_read(dev->gpio_port_b, dev->gpio_pin_b, &pin_b);
-    dev->gpio_read(dev->gpio_port_c, dev->gpio_pin_c, &pin_c);
+    dev->gpio_read(dev->port_a, dev->pin_a, &pin_a);
+    dev->gpio_read(dev->port_b, dev->pin_b, &pin_b);
+    dev->gpio_read(dev->port_c, dev->pin_c, &pin_c);
 
     for(size_t i = 0 ; i < LEN(dg405_mux) ; i++)
     {
@@ -127,7 +127,7 @@ dg405_status_t dg405_get_output(const dg405_dev *dev, uint8_t *output)
  * @brief This internal API is used to validate the device structure pointer for
  * null conditions.
  */
-static dg405_status_t null_ptr_check(const dg405_dev *dev)
+static dg405_status_t null_ptr_check(const dg405_dev_t *dev)
 {
     dg405_status_t rslt;
 

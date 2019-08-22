@@ -71,52 +71,52 @@ typedef struct {
     dg405_gpio_fptr_t gpio_read;
 
     /* Gpio pin A  */
-    void *gpio_port_a;
-    uint16_t gpio_pin_a;
+    void *port_a;
+    uint16_t pin_a;
 
     /* Gpio pin B */
-    void *gpio_port_b;
-    uint16_t gpio_pin_b;
+    void *port_b;
+    uint16_t pin_b;
 
     /* Gpio pin C */
-    void *gpio_port_c;
-    uint16_t gpio_pin_c;
+    void *port_c;
+    uint16_t pin_c;
 
     /* Gpio pin En */
-    void *gpio_port_en;
-    uint16_t gpio_pin_en;
+    void *port_en;
+    uint16_t pin_en;
 
-} dg405_dev;
+} dg405_dev_t;
 
 /*!
  *  @brief This API enables the output of the device
  * 
- *  @param[in] dev : Structure instance of dg405_dev
+ *  @param[in] dev : Structure instance of dg405_dev_t
  */
-dg405_status_t dg405_enable(const dg405_dev *dev);
+dg405_status_t dg405_enable(const dg405_dev_t *dev);
 
 /*!
  *  @brief This API disables the output of the device
  * 
- *  @param[in] dev : Structure instance of dg405_dev
+ *  @param[in] dev : Structure instance of dg405_dev_t
  */
-dg405_status_t dg405_disable(const dg405_dev *dev);
+dg405_status_t dg405_disable(const dg405_dev_t *dev);
 
 /*!
  *  @brief This API routes the mux of the device to output specified pin.
  * 
- *  @param[in] dev    : Structure instance of dg405_dev
+ *  @param[in] dev    : Structure instance of dg405_dev_t
  *  @param[in] output : Output pin to mux
  */
-dg405_status_t dg405_switch_output(const dg405_dev *dev, uint8_t output);
+dg405_status_t dg405_switch_output(const dg405_dev_t *dev, uint8_t output);
 
 /*!
  *  @brief This API gets the current mux'ed pin
  * 
- *  @param[in] dev : Structure instance of dg405_dev
+ *  @param[in] dev : Structure instance of dg405_dev_t
  *  @param[out] output : Pointer to variable to store output
  */
-dg405_status_t dg405_get_output(const dg405_dev *dev, uint8_t* output);
+dg405_status_t dg405_get_output(const dg405_dev_t *dev, uint8_t* output);
 
 
 #ifdef __cplusplus

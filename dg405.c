@@ -90,9 +90,9 @@ dg405_status_t dg405_switch_output(const dg405_dev_t *dev, uint8_t output)
     if(null_ptr_check(dev) != DG405_OK)
         return DG405_E_NULL_PTR;
 
-    dev->gpio_write(dev->port_a, dev->pin_a, &dg405_mux[output][0]);
+    dev->gpio_write(dev->port_a, dev->pin_a, &dg405_mux[output][2]);
     dev->gpio_write(dev->port_b, dev->pin_b, &dg405_mux[output][1]);    
-    dev->gpio_write(dev->port_c, dev->pin_c, &dg405_mux[output][2]);
+    dev->gpio_write(dev->port_c, dev->pin_c, &dg405_mux[output][0]);
 
     return DG405_OK;
 }

@@ -6,3 +6,10 @@ build/
 
 #vscode files
 .vscode/
+
+# Tests
+*.o
+*.d
+/test/lib
+/test/objs
+/test/dg405_tests

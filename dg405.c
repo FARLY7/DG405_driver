@@ -62,7 +62,9 @@ dg405_status_t dg405_enable(const dg405_dev_t *dev)
     if(null_ptr_check(dev) != DG405_OK)
         return DG405_E_NULL_PTR;
 
-    dev->gpio_write(dev->port_en, dev->pin_en, 0);
+    uint8_t val = 0;
+
+    dev->gpio_write(dev->port_en, dev->pin_en, &val);
 
     return DG405_OK;
 }

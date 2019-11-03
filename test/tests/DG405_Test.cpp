@@ -6,7 +6,6 @@
 dg405_dev_t dev = {0};
 uint16_t port;
 
-
 TEST_GROUP(DG405)
 {
     /* Define data accessible to test group members here */
@@ -23,7 +22,6 @@ TEST_GROUP(DG405)
         dev.pin_b   = 4;
         dev.pin_c  = 5;
         dev.pin_en = 6;
-        
         port = 0;
 
         /* Initialisation steps are executed before each TEST */
@@ -46,4 +44,11 @@ TEST(DG405, OnEnableEnPinIsEnabled)
 {
     dg405_enable(&dev);
     LONGS_EQUAL(port, 0 << dev.pin_en);
+}
+
+TEST(DG405, EnableMuxOutputA)
+{
+    dg405_enable(&dev);
+    dg405_switch_output(&dev, 3);
+    LONGS_EQUAL(port, 0x18);
 }

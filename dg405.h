@@ -57,7 +57,7 @@ typedef enum {
 /*!
  * @brief Type definitions
  */
-typedef void (*dg405_gpio_fptr_t)(void* port, uint16_t pin, uint8_t *val);
+typedef void (*dg405_gpio_fptr_t)(void* pin, uint8_t *val);
 
 /*!
  * @brief dg405 device structure
@@ -70,21 +70,10 @@ typedef struct {
     /* Gpio read function pointer */
     dg405_gpio_fptr_t gpio_read;
 
-    /* Gpio pin A  */
-    void *port_a;
-    uint16_t pin_a;
-
-    /* Gpio pin B */
-    void *port_b;
-    uint16_t pin_b;
-
-    /* Gpio pin C */
-    void *port_c;
-    uint16_t pin_c;
-
-    /* Gpio pin En */
-    void *port_en;
-    uint16_t pin_en;
+    void *pin_a;    /* Gpio Pin A */
+    void *pin_b;    /* Gpio Pin B */
+    void *pin_c;    /* Gpio Pin C */
+    void *pin_en;   /* Gpio Pin En */
 
 } dg405_dev_t;
 
